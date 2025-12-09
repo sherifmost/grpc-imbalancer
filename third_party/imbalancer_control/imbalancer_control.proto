@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package imbalancer.control.v1;
+
+// Application-agnostic control-plane messages, xDS-style.
+// Nodes stream their current state (CPU/queue/mode) and receive mode
+// assignments plus optional bounce targets on the same bidirectional stream.
+
+// State a node reports to the coordinator.
+message ImbalancerState {
+  string node_id = 1;         // Unique node identifier.
+  double cpu_util = 2;        // CPU utilization in [0,1]; optional.
+  int64 queue_len = 3;        // Current queue length; optional.
+  string current_mode = 4;    // ACTIVE / IDLE / FAILOVER (or domain-specific).
+  string bounce_target = 5;   // Optional: where this node currently bounces.
+}
+
+// Assignment pushed from coordinator to node.
+message ImbalancerAssignment {
+  string node_id = 1;         // Echo of the node id.
+  string assigned_mode = 2;   // Desired mode (ACTIVE / IDLE / FAILOVER / ...).
+  string bounce_target = 3;   // Optional: target to bounce overflow traffic.
+  int64 ttl_ms = 4;           // Optional: how long this assignment is valid (0 == no expiry).
+}
+
+service ImbalancerControl {
+  // Bidirectional stream: nodes send ImbalancerState, coordinator replies with
+  // ImbalancerAssignment on the same stream (xDS-style).
+  rpc StreamAssignments(stream ImbalancerState)
+      returns (stream ImbalancerAssignment);
+}
