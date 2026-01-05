@@ -33,9 +33,20 @@ message SetModeResponse {
   string message = 2;
 }
 
+// Coordinator -> clients: enumerate current active nodes.
+message ActiveList {
+  repeated string active_nodes = 1;
+}
+
+message Empty {}
+
 service ImbalancerControl {
   // Node -> Coordinator: report state (unary).
   rpc NotifyState(NotifyStateRequest) returns (NotifyStateResponse);
   // Coordinator -> Node: command mode change (unary).
   rpc SetMode(SetModeRequest) returns (SetModeResponse);
+  // Client -> Coordinator: fetch current active node list (unary).
+  rpc GetActive(Empty) returns (ActiveList);
+  // Client -> Coordinator: open a stream to receive active list updates.
+  rpc ActiveStream(Empty) returns (stream ActiveList);
 }
