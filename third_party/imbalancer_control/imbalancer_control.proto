@@ -14,6 +14,7 @@ message NotifyStateRequest {
   int64 queue_len = 3;        // Current queue length; optional.
   string desired_mode = 4;    // What the node wants to be (ACTIVE / IDLE / FAILOVER / ...).
   string bounce_target = 5;   // Optional: where this node currently bounces.
+  double queue_delay_ms = 6;  // Optional: last observed queue delay in ms.
 }
 
 message NotifyStateResponse {
