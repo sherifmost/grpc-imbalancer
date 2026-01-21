@@ -27,6 +27,9 @@ message SetModeRequest {
   string node_id = 1;         // Target node id.
   string mode = 2;            // ACTIVE / IDLE / FAILOVER / ...
   string bounce_target = 3;   // Where to bounce overflow traffic (optional).
+  bool freq_control = 4;      // If true, node should adjust CPU frequency.
+  int32 active_freq_khz = 5;  // Frequency to set when ACTIVE (kHz).
+  int32 idle_freq_khz = 6;    // Frequency to set when IDLE/FAILOVER (kHz).
 }
 
 message SetModeResponse {
