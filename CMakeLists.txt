@@ -2929,7 +2929,6 @@ add_library(grpc
   src/core/load_balancing/ring_hash/ring_hash.cc
   src/core/load_balancing/rls/rls.cc
   src/core/load_balancing/round_robin/round_robin.cc
-  src/core/load_balancing/imbalancer/imbalancer.cc
   src/core/load_balancing/weighted_round_robin/static_stride_scheduler.cc
   src/core/load_balancing/weighted_round_robin/weighted_round_robin.cc
   src/core/load_balancing/weighted_target/weighted_target.cc
@@ -3747,7 +3746,6 @@ add_library(grpc_unsecure
   src/core/load_balancing/ring_hash/ring_hash.cc
   src/core/load_balancing/rls/rls.cc
   src/core/load_balancing/round_robin/round_robin.cc
-  src/core/load_balancing/imbalancer/imbalancer.cc
   src/core/load_balancing/weighted_round_robin/static_stride_scheduler.cc
   src/core/load_balancing/weighted_round_robin/weighted_round_robin.cc
   src/core/load_balancing/weighted_target/weighted_target.cc
