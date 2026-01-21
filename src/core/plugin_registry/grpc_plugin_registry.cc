@@ -64,7 +64,6 @@ extern void RegisterWeightedTargetLbPolicy(CoreConfiguration::Builder* builder);
 extern void RegisterPickFirstLbPolicy(CoreConfiguration::Builder* builder);
 extern void RegisterRingHashLbPolicy(CoreConfiguration::Builder* builder);
 extern void RegisterRoundRobinLbPolicy(CoreConfiguration::Builder* builder);
-extern void RegisterImbalancerLbPolicy(CoreConfiguration::Builder* builder);
 extern void RegisterWeightedRoundRobinLbPolicy(
     CoreConfiguration::Builder* builder);
 extern void RegisterHttpProxyMapper(CoreConfiguration::Builder* builder);
@@ -110,7 +109,6 @@ void BuildCoreConfiguration(CoreConfiguration::Builder* builder) {
   RegisterPickFirstLbPolicy(builder);
 #ifndef GRPC_MINIMAL_LB_POLICY
   RegisterRoundRobinLbPolicy(builder);
-  RegisterImbalancerLbPolicy(builder);
   RegisterRingHashLbPolicy(builder);
   RegisterWeightedRoundRobinLbPolicy(builder);
 #endif
